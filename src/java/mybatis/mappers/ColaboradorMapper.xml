@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="colaborador">
+    <insert id="colaborador-registrar" parameterType="pojo.Colaborador">
+        INSERT INTO colaborador(nombre, apellidoPaterno, apellidoMaterno, 
+        correo, noPersonal, contrasena, curp, idRol, foto, noLicencia)
+        VALUES
+        (#{nombre}, #{apellidoPaterno},#{apellidoMaterno},
+        #{correo},#{noPersonal},#{contrasena},#{curp},
+        #{idRol},#{foto},#{noLicencia});
+    </insert>
+    
+    <update id ="colaboradorActualizar" parameterType ="pojo.Colaborador">
+        UPDATE colaborador 
+        SET nombre = #{nombre}, apellidoPaterno=#{apellidoPaterno}, apellidoMaterno = #{apellidoMaterno}, 
+        correo=#{correo}, contrasena = #{contrasena}, foto = #{foto}, noLicencia =#{noLicencia}
+        WHERE idColaborador = #{idColaborador}
+    </update>
+    
+    <delete id= "colaboradorEliminar" parameterType = "int">
+        DELETE FROM colaborador 
+        WHERE idColaborador = #{idColaborador}
+    </delete>
+    
+    <select id = "colaboradorBuscar" resultType = "pojo.Colaborador">
+        SELECT idColaborador, nombre, apellidoPaterno, apellidoMaterno, 
+        correo, noPersonal,curp, idRol, noLicencia
+        FROM colaborador WHERE nombre = #{nombre} OR noPersonal = #{noPersonal} OR idRol = #{idRol};
+    </select>
+</mapper>

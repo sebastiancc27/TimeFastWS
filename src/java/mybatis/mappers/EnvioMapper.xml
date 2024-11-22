@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="envio">
+    <insert id="agregarEnvio" parameterType="pojo.Envio">
+        INSERT INTO envio( idCliente, calle, numero, colonia, cp, 
+        ciudad, estado, destino, noGuia, costo, estatus, motivo, idConductor)
+        VALUES (#{idCliente}, #{calle}, #{numero}, #{colonia}, #{cp}, #{ciudad},
+        #{estado}, #{destino}, #{noGuia}, #{costo}, #{estatus}, #{motivo},
+        #{idConductor});
+    </insert>
+    <update id="editarEnvio" parameterType="pojo.Envio">
+        UPDATE envio SET idCliente= #{idCliente}, calle= #{calle}, numero=#{numero}, 
+        colonia= #{colonia}, cp=#{cp}, ciudad=#{ciudad}, 
+        estado=#{estado}, destino=#{destino}, costo= #{costo}, estatus=#{estatus}, 
+        motivo= #{motivo}, idConductor=#{idConductor}
+        WHERE idEnvio = #{idEnvio};
+    </update>
+    <delete id="eliminarEnvio" parameterType="int">
+        DELETE FROM envio WHERE idEnvio=#{idEnvio};
+    </delete>
+</mapper>
