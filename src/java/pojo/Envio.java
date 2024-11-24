@@ -24,8 +24,11 @@ public class Envio {
     private String estatus;
     private String motivo;
     private Integer idConductor;
+    private String nombreCliente;
+    private Integer cantidadPaquetes;
+    private String conductorAsignado;
 
-    public Envio(Integer idEnvio, Integer idCliente, String calle, Integer numero, String colonia, String cp, String ciudad, String estado, String destino, Integer noGuia, Float costo, String estatus, String motivo, Integer idConductor) {
+    public Envio(Integer idEnvio, Integer idCliente, String calle, Integer numero, String colonia, String cp, String ciudad, String estado, String destino, Integer noGuia, Float costo, String estatus, String motivo, Integer idConductor, String nombreCliente, Integer cantidadPaquetes, String conductorAsignado) {
         this.idEnvio = idEnvio;
         this.idCliente = idCliente;
         this.calle = calle;
@@ -40,6 +43,9 @@ public class Envio {
         this.estatus = estatus;
         this.motivo = motivo;
         this.idConductor = idConductor;
+        this.nombreCliente = nombreCliente;
+        this.cantidadPaquetes = cantidadPaquetes;
+        this.conductorAsignado = conductorAsignado;
     }
 
 
@@ -47,6 +53,33 @@ public class Envio {
     public Envio() {
     }
 
+    public String getConductorAsignado() {
+        return conductorAsignado;
+    }
+
+    public void setConductorAsignado(String conductorAsignado) {
+        this.conductorAsignado = conductorAsignado;
+    }
+    
+    
+
+    public String getNombreCliente() {
+        return nombreCliente;
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente = nombreCliente;
+    }
+
+    public Integer getCantidadPaquetes() {
+        return cantidadPaquetes;
+    }
+
+    public void setCantidadPaquetes(Integer cantidadPaquetes) {
+        this.cantidadPaquetes = cantidadPaquetes;
+    }
+
+    
     public Integer getIdEnvio() {
         return idEnvio;
     }

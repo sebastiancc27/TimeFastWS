@@ -21,4 +21,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <delete id="eliminarEnvio" parameterType="int">
         DELETE FROM envio WHERE idEnvio=#{idEnvio};
     </delete>
+    
+    <select id ="obtenerEnvioGuia" parameterType = "int" resultType ="pojo.Envio">        
+        select idEnvio, envio.idCliente, envio.calle, envio.numero, envio.colonia, envio.cp, envio.ciudad, envio.estado,
+        envio.destino, envio.noGuia, envio.costo, envio.estatus, envio.motivo, envio.idConductor, 
+        concat(clientes.nombre," ",clientes.apellidoPaterno) as  nombreCliente , count(paquete.descripcion) as cantidadPaquetes,
+        colaborador.nombre as conductorAsignado
+        from envio, clientes, paquete, colaborador
+        where noGuia=#{noGuia} and clientes.idCliente = envio.idCliente 
+        and paquete.envio = envio.idEnvio and colaborador.idColaborador = envio.idConductor;                
+    </select>
+    
+    <select id="obtenerHistorial" parameterType="int" resultType="pojo.HistorialEnvio">
+        select idCambio, idEnvio, estatus, fechaCambio, idColaborador from historialestatusenvio 
+        where idEnvio = #{idEnvio};
+    </select>
 </mapper>

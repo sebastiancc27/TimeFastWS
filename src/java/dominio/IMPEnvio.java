@@ -5,9 +5,11 @@
  */
 package dominio;
 
+import java.util.List;
 import mybatis.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
 import pojo.Envio;
+import pojo.HistorialEnvio;
 import pojo.Mensaje;
 
 /**
@@ -53,5 +55,22 @@ public class IMPEnvio {
                respuesta.setMensaje("Error al conectarse con la base de datos");               
         }
         return respuesta;
+    }
+    
+    public static Envio obtenerEnvio (Integer noGuia){
+        Envio envio = null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if(conexion!=null){
+            envio = conexion.selectOne("envio.obtenerEnvioGuia", noGuia);
+        }
+        return envio;
+    }
+    public static List<HistorialEnvio> obtenerHistorialStatus (Integer idEnvio){
+        List<HistorialEnvio> listaCambios = null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if(conexion!=null){
+            listaCambios=conexion.selectList("envio.obtenerHistorial", idEnvio);
+        }
+        return listaCambios;
     }
 }

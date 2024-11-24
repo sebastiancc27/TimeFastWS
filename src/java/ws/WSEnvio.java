@@ -7,6 +7,7 @@ package ws;
 
 import com.google.gson.Gson;
 import dominio.IMPEnvio;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -15,8 +16,10 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import pojo.Envio;
+import pojo.HistorialEnvio;
 import pojo.Mensaje;
 
 /**
@@ -70,6 +73,20 @@ public class WSEnvio {
             respuesta.setMensaje("Error al editar envio: "+e.toString());
         }
         return respuesta;
+    }
+    
+    @Path("envio-NoGuia/{noGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Envio obtenerEnvio(@PathParam("noGuia") Integer noGuia){
+        return IMPEnvio.obtenerEnvio(noGuia);
+    }
+    
+    @Path("historial-envio/{idEnvio}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<HistorialEnvio> obtenerCambiosStatus(@PathParam("idEnvio") Integer idEnvio){
+        return IMPEnvio.obtenerHistorialStatus(idEnvio);
     }
     
 }
