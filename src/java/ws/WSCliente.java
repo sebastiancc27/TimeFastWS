@@ -7,6 +7,7 @@ package ws;
 
 import com.google.gson.Gson;
 import dominio.IMPCliente;
+import dominio.IMPColaborador;
 import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Context;
@@ -80,5 +81,12 @@ public class WSCliente {
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cliente> buscarClientes(@PathParam("busqueda") String busqueda){
         return IMPCliente.buscarClientes(busqueda);
+    }
+    
+    @Path("obtener-clientes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Cliente> obtenerColaboradores(){
+        return IMPCliente.obtenerClientes();
     }
 }

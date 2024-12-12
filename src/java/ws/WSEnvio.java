@@ -89,4 +89,11 @@ public class WSEnvio {
         return IMPEnvio.obtenerHistorialStatus(idEnvio);
     }
     
+    @Path("obtener-envios")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerColaboradores(){
+        return IMPEnvio.obtenerEnvios();
+    }        
+    
 }

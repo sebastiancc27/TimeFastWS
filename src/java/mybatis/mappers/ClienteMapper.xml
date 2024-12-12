@@ -26,5 +26,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM Clientes 
         WHERE nombre = #{nombre} OR telefono = #{telefono} OR correo=#{correo};
     </select>
-
+    
+    <select id="obtenerClientes" resultType ="pojo.Cliente">
+        select idCliente, nombre, apellidoPaterno, apellidoMaterno,
+        calle, numero, colonia, cp, telefono, correo from clientes;
+    </select>
 </mapper>

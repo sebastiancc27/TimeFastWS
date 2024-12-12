@@ -6,6 +6,7 @@
 package ws;
 
 import com.google.gson.Gson;
+import dominio.IMPCliente;
 import dominio.IMPColaborador;
 import dominio.IMPUnidad;
 import java.util.List;
@@ -22,6 +23,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import static javax.ws.rs.client.Entity.json;
 import javax.ws.rs.core.MediaType;
+import pojo.Cliente;
 import pojo.Colaborador;
 import pojo.Mensaje;
 import pojo.Unidad;
@@ -75,11 +77,11 @@ public class WSUnidad {
         return respuesta;
     }
     
-    @Path("eliminar-unidad/{idUnidad}")
+    @Path("eliminar-unidad/{idUnidad}/{motivo}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje elminarUnidad(@PathParam("idUnidad") Integer idUnidad){
-        return IMPUnidad.eliminarUnidad(idUnidad);
+    public Mensaje elminarUnidad(@PathParam("idUnidad" ) Integer idUnidad, @PathParam("motivo") String motivo){
+        return IMPUnidad.eliminarUnidad(idUnidad, motivo);
     }
     @Path("buscar-unidad/{parametro}")
     @GET
@@ -87,6 +89,11 @@ public class WSUnidad {
     public List<Unidad> buscarUnidad(@PathParam("parametro")String parametros){
         return IMPUnidad.buscarUnidad(parametros);
     }
-            
+    @Path("obtener-unidades")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Unidad> obtenerColaboradores(){
+        return IMPUnidad.obtenerUnidades();
+    }        
     
 }

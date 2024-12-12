@@ -105,4 +105,13 @@ public class IMPColaborador {
         
         return colaboradores;
     }
+    
+    public static List<Colaborador> obtenerColaboradores(){
+        List<Colaborador> colaboradores=  null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if(conexion!=null){
+            colaboradores = conexion.selectList("colaborador.obtenerColaboradores");
+        }
+        return colaboradores;
+    }
 }

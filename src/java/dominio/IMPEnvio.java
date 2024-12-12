@@ -73,4 +73,12 @@ public class IMPEnvio {
         }
         return listaCambios;
     }
+        public static List<Envio> obtenerEnvios(){
+        List<Envio> envios=  null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if(conexion!=null){
+            envios = conexion.selectList("envio.obtenerEnvios");
+        }
+        return envios;
+    }
 }

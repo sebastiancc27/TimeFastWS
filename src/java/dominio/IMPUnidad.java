@@ -59,11 +59,15 @@ public class IMPUnidad {
         return respuesta;
     }
 
-    public static Mensaje eliminarUnidad(Integer idUnidad) {
+    public static Mensaje eliminarUnidad(Integer idUnidad, String motivo) {
         Mensaje respuesta = new Mensaje();
+        HashMap<String,String > parametros = new LinkedHashMap<>();
+        
+        parametros.put("idUnidad", idUnidad.toString());
+        parametros.put("motivo", motivo);
         SqlSession conexion = MybatisUtil.obtenerConexion();
         if (conexion != null) {
-            int resultado = conexion.delete("unidad.eliminarUnidad", idUnidad);
+            int resultado = conexion.delete("unidad.eliminarUnidad", parametros);
             conexion.commit();
             if (resultado > 0) {
                 respuesta.setError(false);
@@ -88,6 +92,14 @@ public class IMPUnidad {
              unidades = conexion.selectList("unidad.buscarUnidad", parametros);
          }
         return unidades;         
+    }
+        public static List<Unidad> obtenerUnidades(){
+        List<Unidad> unidades=  null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if(conexion!=null){
+            unidades = conexion.selectList("unidad.obtener-unidades");
+        }
+        return unidades;
     }
 
 }

@@ -36,4 +36,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select idCambio, idEnvio, estatus, fechaCambio, idColaborador from historialestatusenvio 
         where idEnvio = #{idEnvio};
     </select>
+    
+    <select id="obtenerEnvios" resultType="pojo.Envio">
+        select idEnvio, idCliente, calle, numero, colonia, cp, 
+        ciudad, estado, destino, noGuia, costo, estatus, motivo, idConductor from envio;
+    </select>
 </mapper>

@@ -80,6 +80,12 @@ public class WSColaborador {
     public List<Colaborador> eliminarColaborador(@PathParam("busqueda") String busqeuda){
         return IMPColaborador.buscarColaborador(busqeuda);
     }    
-        
+    
+    @Path("obtener-colaboradores")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Colaborador> obtenerColaboradores(){
+        return IMPColaborador.obtenerColaboradores();
+    }
     
 }
