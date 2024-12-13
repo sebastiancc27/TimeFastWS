@@ -34,8 +34,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtenerColaboradores" resultType="pojo.Colaborador">
-        select idColaborador, nombre, apellidoPaterno, apellidoMaterno, correo, noPersonal,
-        contrasena, curp, idRol, foto, noLicencia from colaborador;
+select idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, correo, noPersonal, 
+contrasena, curp, colaborador.idRol, foto, noLicencia, rol.nombre as nombreColaborador from
+colaborador, rol where rol.idRol=colaborador.idRol;
     </select>
     
 </mapper>

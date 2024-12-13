@@ -21,8 +21,9 @@ public class Colaborador {
     private Integer idRol;
     private String foto;
     private String noLicencia;
+    private String nombreColaborador;
 
-    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String noPersonal, String contrasena, String curp, Integer idRol, String foto, String noLicencia) {
+    public Colaborador(Integer idColaborador, String nombre, String apellidoPaterno, String apellidoMaterno, String correo, String noPersonal, String contrasena, String curp, Integer idRol, String foto, String noLicencia, String nombreColaborador) {
         this.idColaborador = idColaborador;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -34,6 +35,15 @@ public class Colaborador {
         this.idRol = idRol;
         this.foto = foto;
         this.noLicencia = noLicencia;
+        this.nombreColaborador = nombreColaborador;
+    }
+
+    public String getNombreColaborador() {
+        return nombreColaborador;
+    }
+
+    public void setNombreColaborador(String nombreColaborador) {
+        this.nombreColaborador = nombreColaborador;
     }
 
     public Colaborador() {
