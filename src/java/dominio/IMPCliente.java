@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import java.util.HashMap;
@@ -14,10 +9,6 @@ import pojo.Cliente;
 import pojo.Colaborador;
 import pojo.Mensaje;
 
-/**
- *
- * @author sebas
- */
 public class IMPCliente {
 
     public static Mensaje registrarCliente(Cliente cliente) {

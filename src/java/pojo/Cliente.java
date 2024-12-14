@@ -20,8 +20,9 @@ public class Cliente {
     private String cp;
     private String telefono;
     private String correo;
+    private String direccion;
 
-    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String calle, Integer numero, String colonia, String cp, String telefono, String correo) {
+    public Cliente(Integer idCliente, String nombre, String apellidoPaterno, String apellidoMaterno, String calle, Integer numero, String colonia, String cp, String telefono, String correo, String direccion) {
         this.idCliente = idCliente;
         this.nombre = nombre;
         this.apellidoPaterno = apellidoPaterno;
@@ -32,11 +33,22 @@ public class Cliente {
         this.cp = cp;
         this.telefono = telefono;
         this.correo = correo;
+        this.direccion = direccion;
     }
+
 
     public Cliente() {
     }
 
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    
     public Integer getIdCliente() {
         return idCliente;
     }

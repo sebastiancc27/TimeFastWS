@@ -25,6 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtener-unidades" resultType="pojo.Unidad">
-        select idUnidad, marca, modelo, anio, vin, tipoUnidad, nii, idConductor from unidad;
+        select idUnidad, marca, modelo, anio, vin, tipoUnidad, nii, idConductor, colaborador.nombre as nombreConductor from unidad, colaborador
+        where unidad.idConductor = colaborador.idColaborador;
     </select>
 </mapper>

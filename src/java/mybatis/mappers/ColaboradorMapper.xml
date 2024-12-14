@@ -25,12 +25,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         WHERE idColaborador = #{idColaborador}
     </delete>
     
-    <select id = "colaboradorBuscar" resultType = "pojo.Colaborador">
-       SELECT colaborador.idColaborador, colaborador.nombre, colaborador.apellidoPaterno, colaborador.apellidoMaterno, 
+    <select id = "colaboradorBuscar" resultType = "pojo.Colaborador">        
+        SELECT colaborador.idColaborador, colaborador.nombre, colaborador.apellidoPaterno, colaborador.apellidoMaterno, 
         colaborador.correo, colaborador.noPersonal,colaborador.curp, colaborador.idRol, colaborador.noLicencia,
         rol.nombre
-        FROM colaborador,rol WHERE colaborador.nombre = #{nombre} OR colaborador.noPersonal = #{noPersonal}
-        OR (rol.nombre = #{idRol} and rol.idRol = colaborador.idRol);
+        FROM colaborador,rol WHERE (colaborador.nombre = #{nombre} AND colaborador.idRol = rol.idRol) OR (colaborador.noPersonal = #{noPersonal} AND colaborador.idRol = rol.idRol)
+        OR (rol.nombre = #{idRol} AND colaborador.idRol = rol.idRol);
     </select>
     
     <select id="obtenerColaboradores" resultType="pojo.Colaborador">

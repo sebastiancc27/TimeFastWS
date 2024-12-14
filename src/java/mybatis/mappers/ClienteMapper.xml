@@ -22,13 +22,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             DELETE FROM clientes WHERE idCliente = #{idCliente};
     </delete>
     <select id ="buscarCliente" parameterType="map" resultType="pojo.Cliente">
-        SELECT nombre, apellidoPaterno, apellidoMaterno, calle, numero, colonia, cp, telefono, correo 
-        FROM Clientes 
-        WHERE nombre = #{nombre} OR telefono = #{telefono} OR correo=#{correo};
+       SELECT nombre, apellidoPaterno, apellidoMaterno, calle, numero, colonia, cp, telefono, correo 
+        ,concat(calle," #", numero, " Col.", colonia," ",cp) as direccion FROM Clientes 
+        WHERE (nombre = #{nombre}) OR (telefono = #{telefono}) OR (correo=#{correo});
     </select>
     
     <select id="obtenerClientes" resultType ="pojo.Cliente">
         select idCliente, nombre, apellidoPaterno, apellidoMaterno,
-        calle, numero, colonia, cp, telefono, correo from clientes;
+        calle, numero, colonia, cp, telefono, correo, concat(calle," #", numero, " Col.", colonia," ",cp) as direccion
+        from clientes;
     </select>
 </mapper>

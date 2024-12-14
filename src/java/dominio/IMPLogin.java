@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import cifrado.Cifrado;
@@ -17,10 +12,6 @@ import org.apache.ibatis.session.SqlSession;
 import pojo.Colaborador;
 import pojo.LoginColaborador;
 
-/**
- *
- * @author sebas
- */
 public class IMPLogin {
     public static LoginColaborador loginColaborador(String noPersonal, String contrasena){
         LoginColaborador respuesta = new LoginColaborador();

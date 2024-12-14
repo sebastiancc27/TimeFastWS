@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import java.util.List;
@@ -12,10 +7,6 @@ import pojo.Envio;
 import pojo.HistorialEnvio;
 import pojo.Mensaje;
 
-/**
- *
- * @author sebas
- */
 public class IMPEnvio {
     public static Mensaje registrarEnvio (Envio envio){
         Mensaje respuesta = new Mensaje();

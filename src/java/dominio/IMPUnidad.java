@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dominio;
 
 import java.util.HashMap;
@@ -13,10 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import pojo.Mensaje;
 import pojo.Unidad;
 
-/**
- *
- * @author sebas
- */
 public class IMPUnidad {
 
     public static Mensaje registrarUnidad(Unidad unidad) {
