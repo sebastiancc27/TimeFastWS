@@ -4,19 +4,39 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="envio">
-    <insert id="agregarEnvio" parameterType="pojo.Envio">
-        INSERT INTO envio( idCliente, calle, numero, colonia, cp, 
-        ciudad, estado, destino, noGuia, costo, estatus, motivo, idConductor)
-        VALUES (#{idCliente}, #{calle}, #{numero}, #{colonia}, #{cp}, #{ciudad},
-        #{estado}, #{destino}, #{noGuia}, #{costo}, #{estatus}, #{motivo},
-        #{idConductor});
+    <insert id="agregarEnvio" parameterType="pojo.Envio" statementType="CALLABLE">        
+        call sp_insertarEnvio(
+            #{idCliente},
+            #{calle},
+            #{numero},
+            #{colonia},
+            #{cp},
+            #{ciudad},
+            #{estado},
+            #{destino},
+            #{noGuia},
+            #{costo},
+            #{estatus},
+            #{motivo},
+            #{idConductor}
+        );
     </insert>
-    <update id="editarEnvio" parameterType="pojo.Envio">
-        UPDATE envio SET idCliente= #{idCliente}, calle= #{calle}, numero=#{numero}, 
-        colonia= #{colonia}, cp=#{cp}, ciudad=#{ciudad}, 
-        estado=#{estado}, destino=#{destino}, costo= #{costo}, estatus=#{estatus}, 
-        motivo= #{motivo}, idConductor=#{idConductor}
-        WHERE idEnvio = #{idEnvio};
+    <update id="editarEnvio" parameterType="pojo.Envio"  statementType="CALLABLE">
+        call sp_actualizarEnvio(
+            #{idEnvio},
+            #{idCliente},
+            #{calle},
+            #{numero},
+            #{colonia},
+            #{cp},
+            #{ciudad},
+            #{estado},
+            #{destino},
+            #{costo},
+            #{estatus},
+            #{motivo},
+            #{idConductor}
+        );
     </update>
     <delete id="eliminarEnvio" parameterType="int">
         DELETE FROM envio WHERE idEnvio=#{idEnvio};
@@ -43,4 +63,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         colaborador.nombre as conductorAsignado
         from envio, colaborador WHERE colaborador.idColaborador=envio.idConductor;
     </select>
+    
+    
 </mapper>
