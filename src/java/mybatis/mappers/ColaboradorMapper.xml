@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <update id ="colaboradorActualizar" parameterType ="pojo.Colaborador">
         UPDATE colaborador 
         SET nombre = #{nombre}, apellidoPaterno=#{apellidoPaterno}, apellidoMaterno = #{apellidoMaterno}, 
-        correo=#{correo}, contrasena = #{contrasena}, foto = #{foto}, noLicencia =#{noLicencia}
+        correo=#{correo}, contrasena = #{contrasena}, curp=#{curp}, noLicencia =#{noLicencia}
         WHERE idColaborador = #{idColaborador}
     </update>
     
