@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id ="buscarCliente" parameterType="map" resultType="pojo.Cliente">
        SELECT nombre, apellidoPaterno, apellidoMaterno, calle, numero, colonia, cp, telefono, correo 
         ,concat(calle," #", numero, " Col.", colonia," ",cp) as direccion FROM Clientes 
-        WHERE (nombre = #{nombre}) OR (telefono = #{telefono}) OR (correo=#{correo});
+        WHERE (nombre = #{nombre}) OR (telefono = #{telefono}) OR (correo=#{correo}) OR (idCliente=#{idCliente});
     </select>
     
     <select id="obtenerClientes" resultType ="pojo.Cliente">

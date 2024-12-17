@@ -1,4 +1,3 @@
-
 package ws;
 
 import com.google.gson.Gson;
@@ -31,8 +30,8 @@ public class WSPaquete {
     @Path("registrar-paquete")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje registrarPaquete(String paquete){
-        try { 
+    public Mensaje registrarPaquete(String paquete) {
+        try {
             Gson gson = new Gson();
             Paquete paqueteGson = gson.fromJson(paquete, Paquete.class);
             return IMPPaquete.registrarPaquete(paqueteGson);
@@ -40,11 +39,11 @@ public class WSPaquete {
             throw new BadRequestException();
         }
     }
-    
+
     @Path("actualizar-paquete")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje actualizarPaquete(String paquete){
+    public Mensaje actualizarPaquete(String paquete) {
         try {
             Gson gson = new Gson();
             Paquete paqueteGson = gson.fromJson(paquete, Paquete.class);
@@ -53,22 +52,30 @@ public class WSPaquete {
             throw new BadRequestException();
         }
     }
-    
-    @Path("obtener-paquete-envio/{envio}")
+
+    @Path("obtener-paquete-envio/{noGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Paquete> obtenerPaquetePorEnvio(@PathParam("envio") Integer envio){
+    public List<Paquete> obtenerPaquetePorEnvio(@PathParam("noGuia") Integer envio) {
         return IMPPaquete.obtenerPaquetePorEnvio(envio);
     }
-    
+
+    @Path("obtener-paquetes")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Paquete> obtenerPaquetePorEnvio() {
+        return IMPPaquete.obtnerPaquetes();
+    }
+
     @Path("eliminar-paquete/{idPaquete}")
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje eliminarPaquete(@PathParam("idPaquete") Integer idPaquete){
+    public Mensaje eliminarPaquete(@PathParam("idPaquete") Integer idPaquete) {
         try {
             return IMPPaquete.eliminarPaquete(idPaquete);
         } catch (Exception e) {
             throw new BadRequestException();
         }
     }
+
 }

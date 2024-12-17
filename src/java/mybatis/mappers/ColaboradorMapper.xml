@@ -34,9 +34,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtenerColaboradores" resultType="pojo.Colaborador">
-select idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, correo, noPersonal, 
-contrasena, curp, colaborador.idRol, foto, noLicencia, rol.nombre as nombreColaborador from
-colaborador, rol where rol.idRol=colaborador.idRol;
+    select idColaborador, colaborador.nombre, apellidoPaterno, apellidoMaterno, correo, noPersonal, 
+    contrasena, curp, colaborador.idRol, foto, noLicencia, rol.nombre as nombreColaborador from
+    colaborador, rol where rol.idRol=colaborador.idRol;
     </select>
+    <select id="obtenerConductores" resultType ="pojo.Colaborador">
+        select idColaborador, nombre, apellidoPaterno, apellidoMaterno, correo, noPersonal, contrasena, curp, idRol, foto, noLicencia from
+        colaborador where idRol=3;
+    </select>
+    
+        <update id="guardarFoto" parameterType="map"> 
+        update colaborador 
+        set foto = #{foto} 
+        where idColaborador = #{idColaborador};
+    </update>
+    
+    <select id="obtenerFoto" parameterType="int" resultType="pojo.Colaborador">
+ 
+        select idColaborador, nombre, apellidoPaterno, apellidoMaterno, correo, noPersonal, contrasena, curp, idRol,  to_base64(foto) as foto, noLicencia
+        from colaborador where idColaborador = #{idColaborador};
+    </select> 
     
 </mapper>

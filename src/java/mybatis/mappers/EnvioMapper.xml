@@ -44,12 +44,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     
     <select id ="obtenerEnvioGuia" parameterType = "int" resultType ="pojo.Envio">        
         select idEnvio, envio.idCliente, envio.calle, envio.numero, envio.colonia, envio.cp, envio.ciudad, envio.estado,
-        envio.destino, envio.noGuia, envio.costo, envio.estatus, envio.motivo, envio.idConductor, 
-        concat(clientes.nombre," ",clientes.apellidoPaterno) as  nombreCliente , count(paquete.descripcion) as cantidadPaquetes,
-        colaborador.nombre as conductorAsignado
-        from envio, clientes, paquete, colaborador
-        where noGuia=#{noGuia} and clientes.idCliente = envio.idCliente 
-        and paquete.envio = envio.idEnvio and colaborador.idColaborador = envio.idConductor;                
+         envio.destino, envio.noGuia, envio.costo, envio.estatus, envio.motivo, envio.idConductor, 
+         concat(clientes.nombre," ",clientes.apellidoPaterno) as  nombreCliente , count(paquete.descripcion) as cantidadPaquetes,
+         colaborador.nombre as conductorAsignado
+         from envio, clientes, paquete, colaborador
+         where noGuia=#{noGuia} and clientes.idCliente = envio.idCliente and colaborador.idColaborador = envio.idConductor;           
     </select>
     
     <select id="obtenerHistorial" parameterType="int" resultType="pojo.HistorialEnvio">
@@ -58,11 +57,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtenerEnvios" resultType="pojo.Envio">
-        select idEnvio, idCliente, calle, numero, colonia, cp, 
+        select idEnvio, envio.idCliente, envio.calle, envio.numero, envio.colonia, envio.cp, 
         ciudad, estado, destino, noGuia, costo, estatus, motivo, idConductor,
-        colaborador.nombre as conductorAsignado
-        from envio, colaborador WHERE colaborador.idColaborador=envio.idConductor;
+        colaborador.nombre as conductorAsignado, clientes.nombre as nombreCliente
+        from envio, colaborador,clientes WHERE colaborador.idColaborador=envio.idConductor and clientes.idCliente = envio.idCliente;
     </select>
-    
+    <select id="obtenerEnvioColaborador" resultType="pojo.Envio" parameterType="int">
+        select idEnvio, idCliente, calle, numero, colonia, cp, ciudad, estado, destino, noGuia, costo, estatus, motivo, idConductor
+        from envio, colaborador where colaborador.noPersonal = #{noPersonal} and envio.idConductor = colaborador.idColaborador;
+    </select>
     
 </mapper>

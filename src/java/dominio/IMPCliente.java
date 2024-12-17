@@ -77,6 +77,7 @@ public class IMPCliente {
          parametros.put("nombre",busqueda);
          parametros.put("telefono", busqueda);
          parametros.put("correo", busqueda);
+         parametros.put("idCliente", busqueda);
         if(conexion!=null){
             clientes = conexion.selectList("cliente.buscarCliente", parametros);            
         }

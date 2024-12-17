@@ -96,4 +96,10 @@ public class WSEnvio {
         return IMPEnvio.obtenerEnvios();
     }        
     
+    @Path("obtener-envios-colaborador/{noPersonal}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Envio> obtenerColaboradores(@PathParam("noPersonal") Integer noPersonal){
+        return IMPEnvio.obtenerEnviosColaborador(noPersonal);
+    }       
 }

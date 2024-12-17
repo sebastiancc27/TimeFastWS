@@ -105,4 +105,54 @@ public class IMPColaborador {
         }
         return colaboradores;
     }
+    public static List<Colaborador> obtenerConductores(){
+        List<Colaborador> conductores=null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if(conexion!=null){
+            conductores = conexion.selectList("colaborador.obtenerConductores");
+        }
+        return conductores;
+    }
+        public static Mensaje registrarFoto(Integer idColaborador, byte[] foto){
+        Mensaje msj = new Mensaje();
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        LinkedHashMap<String,Object> parametros = new LinkedHashMap<>();
+        parametros.put("idColaborador", idColaborador);
+        parametros.put("foto", foto);
+        
+        if(conexion!=null){
+            try {
+                int filasAfectadas = conexion.update("colaborador.guardarFoto", parametros);
+                conexion.commit();
+                if(filasAfectadas>0){
+                    msj.setError(false);
+                    msj.setMensaje("Imagen del cliente guardada con éxito");
+                }else{
+                    msj.setError(true);
+                    msj.setMensaje("Error al guardar la imagen del cliente"); 
+                }
+            } catch (Exception e) {
+                  msj.setError(false);
+                  msj.setMensaje("Error excepcion : "+e.toString());
+            }
+        }else{
+            msj.setError(false);
+            msj.setMensaje("Error en la conexion con la base de datos");
+        }
+        return msj;
+    }
+    public static Colaborador obtenerFoto(Integer idColaborador){
+          Colaborador cliente = null;
+          SqlSession conexion = MybatisUtil.obtenerConexion();
+          if(conexion!=null){
+              try {
+                  cliente = conexion.selectOne("colaborador.obtenerFoto", idColaborador);
+              } catch (Exception e) {
+                  e.printStackTrace();
+                  cliente = null;
+              }
+   
+          }          
+          return cliente;
+    }
 }

@@ -9,12 +9,17 @@ import com.google.gson.Gson;
 import dominio.IMPCliente;
 import dominio.IMPColaborador;
 import dominio.IMPUnidad;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -23,6 +28,7 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import static javax.ws.rs.client.Entity.json;
 import javax.ws.rs.core.MediaType;
+import static org.apache.jasper.runtime.JspRuntimeLibrary.URLEncode;
 import pojo.Cliente;
 import pojo.Colaborador;
 import pojo.Mensaje;
@@ -81,7 +87,14 @@ public class WSUnidad {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     public Mensaje elminarUnidad(@PathParam("idUnidad" ) Integer idUnidad, @PathParam("motivo") String motivo){
-        return IMPUnidad.eliminarUnidad(idUnidad, motivo);
+        Mensaje respuesta = new Mensaje();
+        try {
+            String motivoDecodificado = URLDecoder.decode(motivo, "UTF-8");
+            respuesta =  IMPUnidad.eliminarUnidad(idUnidad, motivoDecodificado);     
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(WSUnidad.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+        return respuesta; 
     }
     @Path("buscar-unidad/{parametro}")
     @GET
