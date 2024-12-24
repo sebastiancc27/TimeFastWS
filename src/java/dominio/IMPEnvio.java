@@ -58,11 +58,11 @@ public class IMPEnvio {
         return envio;
     }
 
-    public static List<HistorialEnvio> obtenerHistorialStatus(Integer idEnvio) {
+    public static List<HistorialEnvio> obtenerHistorialStatus() {
         List<HistorialEnvio> listaCambios = null;
         SqlSession conexion = MybatisUtil.obtenerConexion();
         if (conexion != null) {
-            listaCambios = conexion.selectList("envio.obtenerHistorial", idEnvio);
+            listaCambios = conexion.selectList("envio.obtenerHistorial");
         }
         return listaCambios;
     }
@@ -83,5 +83,14 @@ public class IMPEnvio {
             envios = conexion.selectList("envio.obtenerEnvioColaborador", noPersonal);
         }
         return envios;
+    }
+
+    public static List<HistorialEnvio> obtenerHistorialEstatusNoGuia(Integer noGuia) {
+        List<HistorialEnvio> listaCambios = null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if (conexion != null) {
+            listaCambios = conexion.selectList("envio.obtenerHistorialNoGuia", noGuia);
+        }
+        return listaCambios;
     }
 }

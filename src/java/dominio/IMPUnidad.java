@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import mybatis.MybatisUtil;
 import org.apache.ibatis.session.SqlSession;
+import pojo.HistorialUnidad;
 import pojo.Mensaje;
 import pojo.Unidad;
 
@@ -52,8 +53,8 @@ public class IMPUnidad {
 
     public static Mensaje eliminarUnidad(Integer idUnidad, String motivo) {
         Mensaje respuesta = new Mensaje();
-        HashMap<String,String > parametros = new LinkedHashMap<>();
-        
+        HashMap<String, String> parametros = new LinkedHashMap<>();
+
         parametros.put("idUnidad", idUnidad.toString());
         parametros.put("motivo", motivo);
         SqlSession conexion = MybatisUtil.obtenerConexion();
@@ -70,27 +71,45 @@ public class IMPUnidad {
         }
         return respuesta;
     }
-    
-    public static List<Unidad> buscarUnidad(String busqueda){
-         List<Unidad> unidades = null;
-         SqlSession conexion = MybatisUtil.obtenerConexion();
-         HashMap<String, String> parametros= new LinkedHashMap<>();                
-         parametros.put("vin",busqueda);
-         parametros.put("marca", busqueda);
-         parametros.put("nii", busqueda);
-         
-         if(conexion!=null){
-             unidades = conexion.selectList("unidad.buscarUnidad", parametros);
-         }
-        return unidades;         
-    }
-        public static List<Unidad> obtenerUnidades(){
-        List<Unidad> unidades=  null;
+
+    public static List<Unidad> buscarUnidad(String busqueda) {
+        List<Unidad> unidades = null;
         SqlSession conexion = MybatisUtil.obtenerConexion();
-        if(conexion!=null){
+        HashMap<String, String> parametros = new LinkedHashMap<>();
+        parametros.put("vin", busqueda);
+        parametros.put("marca", busqueda);
+        parametros.put("nii", busqueda);
+
+        if (conexion != null) {
+            unidades = conexion.selectList("unidad.buscarUnidad", parametros);
+        }
+        return unidades;
+    }
+
+    public static List<Unidad> obtenerUnidades() {
+        List<Unidad> unidades = null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if (conexion != null) {
             unidades = conexion.selectList("unidad.obtener-unidades");
         }
         return unidades;
     }
 
+    public static List<HistorialUnidad> obtenerHistorialUndiades() {
+        List<HistorialUnidad> listaUnidades = null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if (conexion != null) {
+            listaUnidades = conexion.selectList("unidad.obtenerHistorialUnidad");
+        }
+        return listaUnidades;
+    }
+
+    public static List<HistorialUnidad> buscarrHistorialMarca(String marca) {
+        List<HistorialUnidad> listaUnidades = null;
+        SqlSession conexion = MybatisUtil.obtenerConexion();
+        if (conexion != null) {
+            listaUnidades = conexion.selectList("unidad.buscarHistorial",marca);
+        }
+        return listaUnidades;
+    }
 }

@@ -7,6 +7,7 @@ package ws;
 
 import com.google.gson.Gson;
 import dominio.IMPEnvio;
+import java.net.URLDecoder;
 import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
@@ -41,65 +42,75 @@ public class WSEnvio {
 
     /**
      * Retrieves representation of an instance of ws.WSEnvio
+     *
      * @return an instance of java.lang.String
      */
     @Path("registrar-envio")
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje registrarEnvio(String json){
-        Mensaje respuesta= new Mensaje();
+    public Mensaje registrarEnvio(String json) {
+        Mensaje respuesta = new Mensaje();
         try {
-            Gson gson=new Gson();
+            Gson gson = new Gson();
             Envio envio = gson.fromJson(json, Envio.class);
             respuesta = IMPEnvio.registrarEnvio(envio);
         } catch (Exception e) {
             respuesta.setError(false);
-            respuesta.setMensaje("Error al registrar envio: "+e.toString());
+            respuesta.setMensaje("Error al registrar envio: " + e.toString());
         }
         return respuesta;
     }
-    
+
     @Path("editar-envio")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje editarEnvio(String json){
-        Mensaje respuesta= new Mensaje();
+    public Mensaje editarEnvio(String json) {
+        Mensaje respuesta = new Mensaje();
         try {
-            Gson gson=new Gson();
+            Gson gson = new Gson();
             Envio envio = gson.fromJson(json, Envio.class);
+            String motivoDecodificado = URLDecoder.decode(envio.getMotivo(), "UTF-8");
+            envio.setMotivo(motivoDecodificado);
             respuesta = IMPEnvio.editarEnvio(envio);
         } catch (Exception e) {
             respuesta.setError(true);
-            respuesta.setMensaje("Error al editar envio: "+e.toString());
+            respuesta.setMensaje("Error al editar envio: " + e.toString());
         }
         return respuesta;
     }
-    
+
     @Path("envio-NoGuia/{noGuia}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Envio obtenerEnvio(@PathParam("noGuia") Integer noGuia){
+    public Envio obtenerEnvio(@PathParam("noGuia") Integer noGuia) {
         return IMPEnvio.obtenerEnvio(noGuia);
     }
-    
-    @Path("historial-envio/{idEnvio}")
+
+    @Path("historial-envio")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<HistorialEnvio> obtenerCambiosStatus(@PathParam("idEnvio") Integer idEnvio){
-        return IMPEnvio.obtenerHistorialStatus(idEnvio);
+    public List<HistorialEnvio> obtenerCambiosStatus() {
+        return IMPEnvio.obtenerHistorialStatus();
     }
-    
+
     @Path("obtener-envios")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Envio> obtenerColaboradores(){
+    public List<Envio> obtenerColaboradores() {
         return IMPEnvio.obtenerEnvios();
-    }        
-    
+    }
+
+    @Path("obtener-historial-noGuia/{noGuia}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<HistorialEnvio> obtenerHistorialNoGuia(@PathParam("noGuia") Integer noGuia) {
+        return IMPEnvio.obtenerHistorialEstatusNoGuia(noGuia);
+    }
+
     @Path("obtener-envios-colaborador/{noPersonal}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Envio> obtenerColaboradores(@PathParam("noPersonal") Integer noPersonal){
+    public List<Envio> obtenerHistorialCambios(@PathParam("noPersonal") Integer noPersonal) {
         return IMPEnvio.obtenerEnviosColaborador(noPersonal);
-    }       
+    }
 }

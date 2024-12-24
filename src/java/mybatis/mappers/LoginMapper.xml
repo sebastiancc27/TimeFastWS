@@ -7,7 +7,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="loginColaborador" resultType="pojo.Colaborador">
         SELECT idColaborador, nombre, apellidoPaterno, 
         apellidoMaterno, correo, noPersonal,  curp,
-        idRol, noLicencia
+        idRol, noLicencia, contrasena
         FROM colaborador 
         WHERE noPersonal  = #{noPersonal}
         AND contrasena = #{contrasena};

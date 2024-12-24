@@ -24,8 +24,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         FROM unidad WHERE vin =#{vin} OR marca =#{marca} OR nii=#{nii};
     </select>
     
+    <select id ="obtenerHistorialUnidad"  resultType="pojo.HistorialUnidad">
+        select idUnidad, marca, modelo, motivo from unidadeliminada;    
+    </select>
+    
+    <select id ="buscarHistorial"  resultType="pojo.HistorialUnidad">
+       select idUnidad, marca, modelo, motivo from unidadeliminada where marca = #{marca};   
+    </select>    
+    
+    
     <select id="obtener-unidades" resultType="pojo.Unidad">
-        select idUnidad, marca, modelo, anio, vin, tipoUnidad, nii, idConductor, colaborador.nombre as nombreConductor from unidad, colaborador
-        where unidad.idConductor = colaborador.idColaborador;
+SELECT 
+    unidad.idUnidad, 
+    unidad.marca, 
+    unidad.modelo, 
+    unidad.anio, 
+    unidad.vin, 
+    unidad.tipoUnidad, 
+    unidad.nii, 
+    unidad.idConductor, 
+    colaborador.nombre AS nombreConductor
+FROM 
+    unidad
+LEFT JOIN 
+    colaborador
+ON 
+    unidad.idConductor = colaborador.idColaborador;
+
     </select>
 </mapper>

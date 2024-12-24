@@ -78,12 +78,12 @@ public class WSColaborador {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Colaborador> buscarColaborador(@PathParam("busqueda") String busqeuda) {
-        List<Colaborador > colaboradores = null;
+        List<Colaborador> colaboradores = null;
         try {
-        String busquedaDecodificada = URLDecoder.decode(busqeuda,"UTF-8");
-        colaboradores=  IMPColaborador.buscarColaborador(busquedaDecodificada);            
+            String busquedaDecodificada = URLDecoder.decode(busqeuda, "UTF-8");
+            colaboradores = IMPColaborador.buscarColaborador(busquedaDecodificada);
         } catch (Exception e) {
-            System.out.println("ERROR BUSCAR COLABORADOR: "+e.toString());
+            System.out.println("ERROR BUSCAR COLABORADOR: " + e.toString());
         }
         return colaboradores;
 
@@ -102,23 +102,33 @@ public class WSColaborador {
     public List<Colaborador> obtenerConductores() {
         return IMPColaborador.obtenerConductores();
     }
-    
+
     @Path("subir-foto/{idColaborador}")
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
-    public Mensaje subirFoto(@PathParam("idColaborador") Integer idColaborador, byte[] foto){
-      if(idColaborador!=null && idColaborador > 0 && foto!=null)  {
-          return IMPColaborador.registrarFoto(idColaborador, foto);
-      }
-      throw new BadRequestException();
-    }   
-    
+    public Mensaje subirFoto(@PathParam("idColaborador") Integer idColaborador, byte[] foto) {
+        if (idColaborador != null && idColaborador > 0 && foto != null) {
+            return IMPColaborador.registrarFoto(idColaborador, foto);
+        }
+        throw new BadRequestException();
+    }
+
     @Path("obtener-foto/{idColaborador}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Colaborador obtenerFoto(@PathParam("idColaborador") Integer idColaborador){
-        if(idColaborador !=null && idColaborador > 0){
-         return IMPColaborador.obtenerFoto(idColaborador);   
+    public Colaborador obtenerFoto(@PathParam("idColaborador") Integer idColaborador) {
+        if (idColaborador != null && idColaborador > 0) {
+            return IMPColaborador.obtenerFoto(idColaborador);
+        }
+        throw new BadRequestException();
+    }
+
+    @Path("obtener-colaborador-id/{idColaborador}")
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Colaborador obtenerColaboradorID(@PathParam("idColaborador") Integer idColaborador) {
+        if (idColaborador != null && idColaborador > 0) {
+            return IMPColaborador.obtenerColaboradorID(idColaborador);
         }
         throw new BadRequestException();
     }

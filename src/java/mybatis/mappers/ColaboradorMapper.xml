@@ -28,9 +28,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id = "colaboradorBuscar" resultType = "pojo.Colaborador">        
         SELECT colaborador.idColaborador, colaborador.nombre, colaborador.apellidoPaterno, colaborador.apellidoMaterno, 
         colaborador.correo, colaborador.noPersonal,colaborador.curp, colaborador.idRol, colaborador.noLicencia,
-        rol.nombre
+        rol.nombre as nombreColaborador
         FROM colaborador,rol WHERE (colaborador.nombre = #{nombre} AND colaborador.idRol = rol.idRol) OR (colaborador.noPersonal = #{noPersonal} AND colaborador.idRol = rol.idRol)
         OR (rol.nombre = #{idRol} AND colaborador.idRol = rol.idRol);
+    </select>
+    
+    <select id="obtenerColaboradorID" parameterType="int" resultType="pojo.Colaborador">
+        select idColaborador, nombre, apellidoPaterno, apellidoMaterno, correo, noPersonal, contrasena, curp, idRol, foto, noLicencia from
+        colaborador where idColaborador = #{idColaborador};
     </select>
     
     <select id="obtenerColaboradores" resultType="pojo.Colaborador">

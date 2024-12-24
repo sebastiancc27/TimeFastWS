@@ -15,18 +15,51 @@ public class HistorialEnvio {
     private String estatus;
     private String fechaCambio;
     private Integer idColaborador;
+    private Integer noGuia;
+    private String nombreColaborador;
+    private String motivo;
 
-    public HistorialEnvio(Integer idCambio, Integer idEnvio, String estatus, String fechaCambio, Integer idColaborador) {
+    public HistorialEnvio(Integer idCambio, Integer idEnvio, String estatus, String fechaCambio, Integer idColaborador, Integer noGuia, String nombreColaborador, String motivo) {
         this.idCambio = idCambio;
         this.idEnvio = idEnvio;
         this.estatus = estatus;
         this.fechaCambio = fechaCambio;
         this.idColaborador = idColaborador;
+        this.noGuia = noGuia;
+        this.nombreColaborador = nombreColaborador;
+        this.motivo = motivo;
     }
+
+
 
     public HistorialEnvio() {
     }
 
+    public String getMotivo() {
+        return motivo;
+    }
+
+    public void setMotivo(String motivo) {
+        this.motivo = motivo;
+    }
+
+    public Integer getNoGuia() {
+        return noGuia;
+    }
+
+    public void setNoGuia(Integer noGuia) {
+        this.noGuia = noGuia;
+    }
+
+    public String getNombreColaborador() {
+        return nombreColaborador;
+    }
+
+    public void setNombreColaborador(String nombreColaborador) {
+        this.nombreColaborador = nombreColaborador;
+    }
+
+    
     public Integer getIdCambio() {
         return idCambio;
     }
