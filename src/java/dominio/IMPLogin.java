@@ -26,7 +26,7 @@ public class IMPLogin {
             //ESTE COLABORADOR TIENE LA CONTRASEÑA CIFRADA
             Colaborador colaborador = conexion.selectOne("sesion.loginColaborador", parametros);
             if(colaborador!=null){
-                String contrasenaDesifrada=Cifrado.deecnode(contrasenaCifrada);                  
+                String contrasenaDesifrada=Cifrado.deecnode(colaborador.getContrasena());                  
                 colaborador.setContrasena(contrasenaDesifrada);
                 String token = crearWebToken(colaborador);
                 respuesta.setError(false);

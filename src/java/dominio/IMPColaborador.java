@@ -150,10 +150,13 @@ public class IMPColaborador {
 
     public static Colaborador obtenerFoto(Integer idColaborador) {
         Colaborador cliente = null;
-        SqlSession conexion = MybatisUtil.obtenerConexion();
+        SqlSession conexion = MybatisUtil.obtenerConexion();        
         if (conexion != null) {
             try {
                 cliente = conexion.selectOne("colaborador.obtenerFoto", idColaborador);
+                String contrasenaDescifrada = Cifrado.deecnode(cliente.getContrasena());
+                System.out.println("Contraseña descifrada: "+contrasenaDescifrada + cliente.getContrasena());
+                cliente.setContrasena(contrasenaDescifrada);
             } catch (Exception e) {
                 e.printStackTrace();
                 cliente = null;
