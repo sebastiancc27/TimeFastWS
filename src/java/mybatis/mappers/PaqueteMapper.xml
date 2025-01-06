@@ -31,7 +31,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </update>
     
     <select id="seleccionarPorEnvio" parameterType="int" resultType="pojo.Paquete">
-select idPaquete, noPaquete, descripcion, peso, alto, ancho, profundidad, envio from paquete,envio where envio.noGuia=#{noGuia} and envio.idEnvio=paquete.envio; 
+      select idPaquete, noPaquete, descripcion, peso, alto, ancho, profundidad, envio from paquete where paquete.envio = #{envio}; 
     </select>
     
     <select id="seleccionarPaquete" parameterType="int" resultType="pojo.Paquete">

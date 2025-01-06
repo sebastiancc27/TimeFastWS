@@ -53,10 +53,10 @@ public class WSPaquete {
         }
     }
 
-    @Path("obtener-paquete-envio/{noGuia}")
+    @Path("obtener-paquete-envio/{envio}")
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Paquete> obtenerPaquetePorEnvio(@PathParam("noGuia") Integer envio) {
+    public List<Paquete> obtenerPaquetePorEnvio(@PathParam("envio") Integer envio) {
         return IMPPaquete.obtenerPaquetePorEnvio(envio);
     }
 

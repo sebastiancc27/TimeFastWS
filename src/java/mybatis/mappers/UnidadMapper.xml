@@ -9,10 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </insert>
     
     <update id = "editarUnidad" parameterType="pojo.Unidad">
-        UPDATE unidad SET
-        marca = #{marca}, modelo=#{modelo}, anio=#{anio}, 
-        tipoUnidad=#{tipoUnidad}, nii=#{nii}, idConductor=#{idConductor} 
-        WHERE idUnidad = #{idUnidad} ;
+        CALL sp_editarUnidad(#{marca},#{modelo},#{anio},#{tipoUnidad},#{nii},#{idConductor},#{idUnidad});
     </update>
     
     <delete id ="eliminarUnidad" parameterType="map" statementType="CALLABLE">

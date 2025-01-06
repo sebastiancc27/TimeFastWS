@@ -27,8 +27,9 @@ public class Envio {
     private String nombreCliente;
     private Integer cantidadPaquetes;
     private String conductorAsignado;
+    private Integer idColaborador;
 
-    public Envio(Integer idEnvio, Integer idCliente, String calle, Integer numero, String colonia, String cp, String ciudad, String estado, String destino, Integer noGuia, Float costo, String estatus, String motivo, Integer idConductor, String nombreCliente, Integer cantidadPaquetes, String conductorAsignado) {
+    public Envio(Integer idEnvio, Integer idCliente, String calle, Integer numero, String colonia, String cp, String ciudad, String estado, String destino, Integer noGuia, Float costo, String estatus, String motivo, Integer idConductor, String nombreCliente, Integer cantidadPaquetes, String conductorAsignado, Integer idColaborador) {
         this.idEnvio = idEnvio;
         this.idCliente = idCliente;
         this.calle = calle;
@@ -46,9 +47,16 @@ public class Envio {
         this.nombreCliente = nombreCliente;
         this.cantidadPaquetes = cantidadPaquetes;
         this.conductorAsignado = conductorAsignado;
+        this.idColaborador = idColaborador;
     }
 
+    public Integer getIdColaborador() {
+        return idColaborador;
+    }
 
+    public void setIdColaborador(Integer idColaborador) {
+        this.idColaborador = idColaborador;
+    }
 
     public Envio() {
     }

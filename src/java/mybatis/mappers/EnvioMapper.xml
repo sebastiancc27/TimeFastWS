@@ -34,7 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             #{costo},
             #{estatus},
             #{motivo},
-            #{idConductor}
+            #{idConductor},
+            #{idColaborador}
         );
     </update>
     <delete id="eliminarEnvio" parameterType="int">
@@ -51,9 +52,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
     
     <select id="obtenerHistorial" resultType="pojo.HistorialEnvio">
-        select idCambio, envio.noGuia,h.idEnvio, h.estatus, fechaCambio, colaborador.nombre as nombreColaborador
-        , motivo from historialestatusenvio h, envio, colaborador
-        where h.idEnvio=envio.idEnvio and colaborador.idColaborador = envio.idConductor ;
+        select idCambio, h.idEnvio, h.estatus, fechaCambio, h.idColaborador, motivo, c.nombre as nombreColaborador, envio.noGuia as noGuia from historialestatusenvio h
+        , colaborador c, envio  where  c.idColaborador = h.idColaborador and envio.idEnvio = h.idEnvio;
     </select>
     
     <select id="obtenerHistorialNoGuia" parameterType="int" resultType="pojo.HistorialEnvio">

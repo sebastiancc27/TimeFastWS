@@ -106,6 +106,10 @@ public class IMPColaborador {
         SqlSession conexion = MybatisUtil.obtenerConexion();
         if (conexion != null) {
             colaboradores = conexion.selectList("colaborador.obtenerColaboradores");
+            for(int i = 0;i<colaboradores.size();i++){
+                String contrasenaDescodificada = Cifrado.deecnode(colaboradores.get(i).getContrasena());
+                colaboradores.get(i).setContrasena(contrasenaDescodificada);
+            }
         }
         return colaboradores;
     }

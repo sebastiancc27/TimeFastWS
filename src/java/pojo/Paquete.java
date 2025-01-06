@@ -9,7 +9,6 @@ public class Paquete {
     private float ancho;
     private float profundidad;
     private Integer envio;
-
     public Paquete() {
     }
 
@@ -23,7 +22,6 @@ public class Paquete {
         this.profundidad = profundidad;
         this.envio = envio;
     }
-
     public Integer getIdPaquete() {
         return idPaquete;
     }
