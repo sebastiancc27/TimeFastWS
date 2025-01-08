@@ -8,6 +8,7 @@ package ws;
 import com.google.gson.Gson;
 import dominio.IMPCliente;
 import dominio.IMPColaborador;
+import java.net.URLDecoder;
 import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.core.Context;
@@ -80,7 +81,8 @@ public class WSCliente {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Cliente> buscarClientes(@PathParam("busqueda") String busqueda){
-        return IMPCliente.buscarClientes(busqueda);
+        String busquedaCliente = URLDecoder.decode(busqueda);
+        return IMPCliente.buscarClientes(busquedaCliente);
     }
     
     @Path("obtener-clientes")

@@ -35,11 +35,19 @@ public class WSLogin {
     public WSLogin() {
     }
 
-   @Path("login-colaborador")
-   @POST
-   @Produces(MediaType.APPLICATION_JSON)
-   public LoginColaborador iniciarSesionColaborador(@FormParam("noPersonal") String noPersonal,
-       @FormParam("contrasena") String contrasena){
-       return IMPLogin.loginColaborador(noPersonal, contrasena);
-   }
+    @Path("login-colaborador")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public LoginColaborador iniciarSesionColaborador(@FormParam("noPersonal") String noPersonal,
+            @FormParam("contrasena") String contrasena) {
+        return IMPLogin.loginColaborador(noPersonal, contrasena);
+    }
+
+    @Path("login-conductor")
+    @POST
+    @Produces(MediaType.APPLICATION_JSON)
+    public LoginColaborador inicioSesionConductor(@FormParam("noPersonal") String noPersonal,
+            @FormParam("contrasena") String contrasena) {
+        return IMPLogin.loginConductor(noPersonal, contrasena);
+    }
 }

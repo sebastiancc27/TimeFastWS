@@ -13,4 +13,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         AND ((idRol = 2)OR (idRol = 1))
         AND contrasena = #{contrasena};
     </select>  
+    
+        <select id="loginConductor" resultType="pojo.Colaborador">
+        SELECT idColaborador, nombre, apellidoPaterno, 
+        apellidoMaterno, correo, noPersonal,  curp,
+        idRol, noLicencia, contrasena
+        FROM colaborador 
+        WHERE noPersonal  = #{noPersonal}
+        AND (idRol = 3)
+        AND contrasena = #{contrasena};
+    </select>  
 </mapper>
